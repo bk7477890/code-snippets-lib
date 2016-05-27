@@ -1,5 +1,18 @@
 # Linux Shell
 
+## debug
+
+### 语法检查
+
+```Shell
+# 不执行脚本，仅做语法检查
+sh -n script_name.sh
+```
+
+### 调试
+
+sh -x script_name.sh
+
 ## SCP
 
 ### 文件下载
