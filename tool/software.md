@@ -12,6 +12,14 @@ before launch： 添加 Maven goal： package -Dmaven.test.skip=true （添加�
 ### jar包重新引入
 Press CTRL+SHIFT+A to find actions, and input "reimport", you will find the "Reimport All Maven Projects". On a Mac, use CMD+SHIFT+A instead.
 
+### JRebel for IntelliJ
+
+https://plugins.jetbrains.com/plugin/4441?pr=&showAllUpdates=true
+
+[Artifacts配置](http://blog.csdn.net/z69183787/article/details/41416189)
+
+[JRebel配置](http://wiki.jikexueyuan.com/project/intellij-idea-tutorial/jrebel-setup.html)
+
 ## iTerm2
 Terminal alarm 可以关掉的。#iTerm2 是 Profioes - Terminal - Notifications，勾选 silence bell RT
 
