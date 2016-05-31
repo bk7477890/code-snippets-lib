@@ -189,3 +189,38 @@ git push
 #撤消“上上次”(next-to-last)的提交
 git revert HEAD^
 ```
+
+## Sed & Awk
+
+### mock grep
+
+```bash
+$ cat phrase.sh
+#! /bin/sh
+# phrase -- search for words across lines
+# $1 = search string; remaining args = filenames
+
+search=$1
+
+for file in ${@:2}; do
+    sed "/$search/b
+    $!N
+    h
+    s/.*n//
+    /$search/b
+    g
+    s/ *n/ /
+    /$search/{
+    g
+    b
+    }
+    g
+    D" $file
+done
+
+$ chmod +x phrase.sh
+$ ./phrase.sh 'the word' text
+the word. Or if the word appears across two lines, like
+It will print this line, because the
+word appears across two lines.
+```
