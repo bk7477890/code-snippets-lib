@@ -23,6 +23,8 @@ scp -P 10022 houpu@10.11.3.193:~/tata ~/
 scp -P 10022 houpu@10.11.3.179:~/work/webm_config/online_config.properties ~/
 
 scp -P 10022 houpu@10.19.18.159:/home/mapp/searchservice/target/searchservice.war ~/
+
+scp -P 10022 houpu@10.17.31.65:/var/www/html/www.mogujie.com/appbeta/logs/crond/20160604/search_dc_check.log  /home/houpu/tempfile/search_dc_check_64_3165.log
 ```
 
 ### 文件上传
@@ -224,3 +226,11 @@ the word. Or if the word appears across two lines, like
 It will print this line, because the
 word appears across two lines.
 ```
+
+## nohup 后台运行
+
+`nohup node streamDiff.js > nohup.log`
+
+使用 jobs 查看任务。
+
+使用 fg %n　关闭。
