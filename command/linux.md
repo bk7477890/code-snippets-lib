@@ -229,8 +229,16 @@ word appears across two lines.
 
 ## nohup 后台运行
 
-`nohup node streamDiff.js > nohup.log`
+`nohup node streamDiff.js > nohup.log &`
 
 使用 jobs 查看任务。
 
 使用 fg %n　关闭。
+
+## node
+
+npm install
+
+npm i --save jsondiffpatch
+
+npm --registry "http://npm.f2e.mogujie.org/" install @mogu/up-components
