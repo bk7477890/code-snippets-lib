@@ -224,6 +224,72 @@ run.jvmArguments
 
 持久代溢出处理 mvn spring-boot:run -Drun.jvmArguments="-Xmx1024m -XX:MaxPermSize=128M"
 
+### package  web.war
+
+```xml
+<build>
+    <!--resources占位符替换-->
+    <resources>
+        <resource>
+            <directory>src/main/resources</directory>
+            <filtering>true</filtering>
+        </resource>
+    </resources>
+
+    <finalName>${project.webwar.name}</finalName>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-war-plugin</artifactId>
+            <version>2.1-alpha-1</version>
+            <configuration>
+                <webXml>src\main\webapp\WEB-INF\web.xml</webXml>
+                <webResources>
+                    <resource>
+                        <!-- 元配置文件的目录，相对于pom.xml文件的路径 -->
+                        <directory>src/main/webapp/WEB-INF</directory>
+                        <filtering>true</filtering>
+                        <!-- 目标路径 -->
+                        <targetPath>WEB-INF</targetPath>
+                    </resource>
+
+                </webResources>
+            </configuration>
+        </plugin>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <configuration>
+                <source>1.7</source>
+                <target>1.7</target>
+                <encoding>UTF-8</encoding>
+            </configuration>
+        </plugin>
+        <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <version>1.5.0</version>
+            <executions>
+                <execution>
+                    <phase>prepare-package</phase>
+                    <goals>
+                        <goal>java</goal>
+                    </goals>
+                    <configuration>
+                        <mainClass>com.mogujie.search.datacenter.web.util.BuildJSConfig</mainClass>
+                        <!--<arguments>-->
+                            <!--<argument>arg0</argument>-->
+                            <!--<argument>arg1</argument>-->
+                        <!--</arguments>-->
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
+    </plugins>
+</build>
+```
+
+
 ## Tomcat
 ### web root 问题
 Web app root system property already set to different value: 'webapp.root' = [/usr/local/apache-tomcat-7.0.67/webapps/houpuss/] instead of [/usr/local/apache-tomcat-7.0.67/webapps/changwenss/] - Choose unique values for the 'webAppRootKey' context-param in your web.xml files!
