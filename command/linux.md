@@ -242,3 +242,7 @@ npm install
 npm i --save jsondiffpatch
 
 npm --registry "http://npm.f2e.mogujie.org/" install @mogu/up-components
+
+npm config get registry  //https://registry.npmjs.org/
+
+npm config set registry https://registry.npm.taobao.org
