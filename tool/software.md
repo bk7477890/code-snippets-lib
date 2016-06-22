@@ -88,6 +88,63 @@ costa-web.xml
     </build>
 ```
 
+### maven placeholder replace
+
+```xml
+<build>
+    <filters>
+        <filter>${user.home}/antx.properties</filter>
+    </filters>
+    <resources>
+        <resource>
+            <directory>src/main/resources</directory>
+            <includes>
+                <include>**.xml</include>
+            </includes>
+            <filtering>true</filtering>
+        </resource>
+        <resource>
+            <directory>src/main/resources</directory>
+            <excludes>
+                <exclude>**.xml</exclude>
+            </excludes>
+        </resource>
+    </resources>
+    <plugins>
+        <plugin>
+            <artifactId>maven-war-plugin</artifactId>
+            <configuration>
+                <webResources>
+                    <resource>
+                        <directory>src/main/webapp</directory>
+                        <includes>
+                            <include>WEB-INF/**.xml</include>
+                        </includes>
+                        <filtering>true</filtering>
+                    </resource>
+                    <resource>
+                        <directory>src/main/webapp</directory>
+                        <excludes>
+                            <include>WEB-INF/**.xml</include>
+                        </excludes>
+                    </resource>
+                </webResources>
+            </configuration>
+        </plugin>
+    </plugins>
+</build>
+```
+
+#### 说明 [参考](http://openwebx.org/docs/autoconfig.html)
+
+这段pom定义告诉maven：
+1. 用指定的properties文件（${user.home}/antx.properties）中的值，替换文件中的placeholders。
+2. 过滤src/main/resources/目录中的所有xml文件，替换其中的placeholders。
+3. 过滤src/webapp/WEB-INF/目录中的所有xml文件，替换其中的placeholders。
+如果上述xml文件中，包含“${xxx.yyy.zzz}”这样的placeholders，将被替换成properties文件中的相应值。
+
+
+
 ### skip compiler some java file
 
 ```xml
@@ -320,6 +377,12 @@ address=61277 说明 port为61277
 cd .default/webapps/ROOT/WEB-INF/lib/
 
 ./appctl pubstart
+
+### Tomcat encoding question
+
+[Tomcat的URIEncoding、useBodyEncodingForURI和CharacterEncodingFilter](http://lgbolgger.iteye.com/blog/2106667)
+
+URI 中参数 设置到 queryString 中。
 
 ### 部署脚本
 
