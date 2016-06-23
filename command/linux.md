@@ -246,3 +246,32 @@ npm --registry "http://npm.f2e.mogujie.org/" install @mogu/up-components
 npm config get registry  //https://registry.npmjs.org/
 
 npm config set registry http://npm.f2e.mogujie.org/
+
+
+##  start && stop
+
+```bash
+DEPLOY_DIR=`pwd`
+PID_FILE=${DEPLOY_DIR}/pid;
+if [ ! -f $PID_FILE ];then
+	touch ${PID_FILE};
+else
+	PID=$(cat ${PID_FILE});
+	PID_EXIST=$(ps aux | grep $PID | grep -v 'grep');
+	if [ ! -z "$PID_EXIST" ];then
+		echo "service is running,no need to start again!...";
+		exit 1;
+	fi
+fi
+echo "$!" > ${PID_FILE};
+
+
+DEPLOY_DIR=`pwd`
+PID_FILE=${DEPLOY_DIR}/pid;
+if [ ! -f $PID_FILE ];then
+	echo " echo $PID_FILE can not find , please check service is running !...";
+	exit 1;
+fi
+PID=$(cat $PID_FILE);
+cat $PID_FILE | xargs kill > /dev/null 2>&1;
+```
